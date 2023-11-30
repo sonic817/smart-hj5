@@ -51,9 +51,6 @@ function login() {
                 break;
             default:
                 const sn = jSONOResponse.data; // 서버에서 가져온 값을 할당
-//                window.location.href = `http://dreammes.iptime.org:1880/response?data=${sn}`;
-//                window.location.href = "/chart/menu?sn=" + sn;
-//                window.location.href = "http://221.138.36.2:1880/response?data=" + sn;
                 window.location.href = "http://hj5ujbhw.iptime.org:1880/response?data=" + sn;
 
                 break;
