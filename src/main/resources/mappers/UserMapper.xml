@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.smart.hj5.domain.user.UserMapper">
+
+    <select id="getUser" resultType="kr.smart.hj5.domain.user.responseDto.UserDto">
+        SELECT TOP 1
+        [USER_SEQ],
+        [USER_ID],
+        [USER_PW],
+        [HP],
+        [DONG],
+        [HO],
+        [SN],
+        [USE_YN],
+        [INSERT_TS],
+        [UPDATE_TS]
+        FROM [ami_user]
+        WHERE [SN] = #{sn}
+        ;
+    </select>
+
+    <insert id="addUser" parameterType="kr.smart.hj5.domain.user.responseDto.SignUpResponseDto" useGeneratedKeys="true" keyProperty="userSeq">
+        INSERT INTO ami_user (USER_ID, USER_PW, HP, DONG, HO, SN, USE_YN)
+        VALUES(#{dto.userId}, #{dto.userPw}, #{dto.hp}, #{dto.dong}, #{dto.ho}, #{dto.sn}, 'Y')
+        ;
+    </insert>
+
+    <select id="getUserPreRegDto" resultType="kr.smart.hj5.domain.user.responseDto.UserPreRegDto">
+        SELECT TOP 1
+        [USER_PRE_SEQ],
+        [DONG],
+        [HO],
+        [HP],
+        [REG_TS],
+        [USE_FLAG],
+        [INSERT_TS],
+        [UPDATE_TS]
+        FROM [ami_user_pre_reg]
+        WHERE [DONG] = #{dong} AND [HO] = #{ho} AND [TEMP_PW] = #{tempPw}
+        ;
+    </select>
+
+    <update id="setUserPreRegDto">
+        update [ami_user_pre_reg] set
+        [REG_TS] = #{regTs},
+        [USE_FLAG] = #{flag}
+        WHERE [DONG] = #{dong} AND [HO] = #{ho} AND [TEMP_PW] = #{tempPw}
+        ;
+    </update>
+
+    <insert id="addLoginHis">
+        INSERT INTO ami_user_login_his
+        (USER_SEQ)
+        VALUES (#{userSeq})
+        ;
+    </insert>
+
+    <select id="getUserById" resultType="kr.smart.hj5.domain.user.responseDto.UserDto">
+        SELECT TOP 1
+        [USER_SEQ],
+        [USER_ID],
+        [USER_PW],
+        [HP],
+        [DONG],
+        [HO],
+        [SN],
+        [USE_YN],
+        [INSERT_TS],
+        [UPDATE_TS]
+        FROM [ami_user]
+        WHERE [USER_ID] = #{userId}
+        ;
+    </select>
+
+</mapper>

@@ -1,0 +1,85 @@
+plugins {
+	id 'org.springframework.boot' version '2.5.1'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+group = 'kr.smart'
+version = '0.0.1-SNAPSHOT'
+
+// 컴파일 시점에도 의존성을 확인한다.
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	// 기본
+	implementation 'org.springframework.boot:spring-boot-starter'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	// lombok
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	// mybatis
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0'
+
+	// json
+	implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+
+	// 스웨거
+	implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+	implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
+
+	// 스프링 부트 보안 관련
+	implementation "org.springframework.boot:spring-boot-starter-security"
+
+	// WebSocket
+	implementation 'org.springframework.boot:spring-boot-starter-websocket'
+
+	// MS SQL JDBC 드라이버
+	implementation 'com.microsoft.sqlserver:mssql-jdbc'
+
+	// 스프링 시큐리티 OAuth2
+	implementation 'org.springframework.security:spring-security-oauth2-client'
+
+	// thymeleaf
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+	// Log4JDBC
+	implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16'
+
+//	implementation group: 'javax.mail', name: 'javax.mail-api', version: '1.6.2' // 현재 버전을 확인하여 업데이트할 수 있습니다.
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
+
+}
+
+java {
+	sourceCompatibility = JavaVersion.VERSION_1_8
+	targetCompatibility = JavaVersion.VERSION_11
+
+	if (JavaVersion.current() != project.targetCompatibility) {
+		logger.warn("The build is using Java ${JavaVersion.current()} to build a Java ${project.targetCompatibility} compatible archive.")
+		logger.warn("See the project README for instructions on changing the target Java version.")
+	}
+}
+
+tasks {
+	processResources {
+		duplicatesStrategy = org.gradle.api.file.DuplicatesStrategy.INCLUDE
+	}
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+jar {
+	enabled = false
+}

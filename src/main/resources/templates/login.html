@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" th:href="@{/css/default.css}"/>
+    <link rel="stylesheet" th:href="@{/css/login.css}"/>
+    <script src="../static/js/login.js"></script>
+    <title>로그인</title>
+
+    <!-- jQuery 라이브러리 로드 -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<section class="login">
+    <h2>로그인</h2>
+    <ul>
+        <li><input type="text" id="userId" placeholder="아이디" title="아이디 입력"/></li>
+        <li>
+            <input type="password" id="userPw" placeholder="비밀번호" title="비밀번호 입력"/>
+        </li>
+        <li>
+            <input
+                    type="checkbox"
+                    id="chkId"
+                    class="custom-checkbox"
+                    onclick="toggleCheckbox()"
+            />
+            <label for="chkId">아이디 저장</label>
+        </li>
+        <li>
+            <button id="login-button" onclick="login()">로그인</button>
+        </li>
+    </ul>
+    <div>
+        <ul>
+            <li><a href="/user/sign-up">회원가입</a></li>
+            <li><a href="">아이디 찾기</a></li>
+            <li><a href="">비밀번호 찾기</a></li>
+        </ul>
+    </div>
+</section>
+</body>
+</html>

@@ -1,0 +1,42 @@
+.chartMenu {
+  width: 90%; /* 화면 너비의 90%만 사용 */
+  max-width: 410px; /* 최대 너비 설정 */
+  margin: 0 auto; /* 가운데 정렬을 위해 자동 마진 사용 */
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.chartMenu h2 {
+  padding: 0 0 20px;
+  border-bottom: 2px solid #111;
+  text-align: center;
+  line-height: 1;
+  font-size: 32px;
+  color: #111;
+}
+
+.chartMenu > ul {
+  padding: 40px 0 33px;
+}
+
+.chartMenu button {
+  width: 100%;
+  height: 56px;
+  background: #3498db;
+  font-size: 18px;
+  color: #fff;
+  cursor: pointer; /* 커서 모양을 포인터로 변경하여 클릭 가능하게 함 */
+  transition: background 0.3s; /* 호버 시 배경색 변화에 0.3초 애니메이션 효과 추가 */
+  border-radius: 10px; /* 버튼의 꼭지점을 라운딩하고 원하는 정도 설정 */
+}
+
+.chartMenu button:hover {
+  background: #2980b9; /* 버튼에 호버 스타일 추가 */
+}
+
+.chartMenu > ul li {
+  padding: 0 0 12px;
+}

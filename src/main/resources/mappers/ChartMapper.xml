@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.smart.hj5.domain.chart.ChartMapper">
+
+    <select id="getTwoHourlyWaterFlowChangeList" resultType="kr.smart.hj5.domain.chart.responseDto.MeteringWaterResponseDto">
+        WITH CFlowChange AS (
+            SELECT
+                t1.METER_DT,
+                t1.C_FLOW - LAG(t1.C_FLOW, 1, '0') OVER (ORDER BY t1.METER_DT) AS FlowChange
+                from (
+                SELECT
+                distinct
+                METER_DT,
+                CAST(C_FLOW AS FLOAT) AS C_FLOW
+                FROM
+                AMI_Metering_Water
+                WHERE
+                SN = #{sn} AND
+                CAST(METER_DT AS DATE) = '2023-04-25'
+            ) AS t1
+        )
+        SELECT
+        METER_DT AS METER_TS,
+        FlowChange AS METER
+        FROM
+        CFlowChange
+        WHERE
+        DATEPART(HOUR, METER_DT) % 2 = 0
+        ORDER BY
+        METER_DT
+        ;
+    </select>
+
+    <select id="getWeeklyWaterFlowChangeList" resultType="kr.smart.hj5.domain.chart.responseDto.MeteringWaterResponseDto">
+        WITH CFlowChange AS (
+            SELECT
+                t1.METER_DT,
+                t1.C_FLOW - LAG(t1.C_FLOW, 1, '0') OVER (ORDER BY t1.METER_DT) AS FlowChange
+                from (
+                SELECT
+                DISTINCT
+                METER_DT,
+                CAST(C_FLOW AS FLOAT) AS C_FLOW
+                FROM
+                AMI_Metering_Water
+                WHERE
+                SN = #{sn} AND
+                CAST(METER_DT AS TIME) = '00:00:00.000' AND
+                DAY(METER_DT) = 1
+            ) AS t1
+        )
+        SELECT
+        METER_DT AS METER_TS,
+        FlowChange AS METER
+        FROM
+        CFlowChange
+        WHERE
+        DATEPART(HOUR, METER_DT) % 2 = 0
+        ORDER BY
+        METER_DT
+        ;
+    </select>
+
+    <select id="getMonthlySixWaterFlowChangeList" resultType="kr.smart.hj5.domain.chart.responseDto.MeteringWaterResponseDto">
+        WITH CFlowChange AS (
+            SELECT
+            t1.METER_DT,
+            t1.C_FLOW - LAG(t1.C_FLOW, 1, '0') OVER (ORDER BY t1.METER_DT) AS FlowChange
+            from (
+                SELECT
+                DISTINCT
+                METER_DT,
+                CAST(C_FLOW AS FLOAT) AS C_FLOW
+                FROM
+                AMI_Metering_Water
+                WHERE
+                SN = #{sn} AND
+                CAST(METER_DT AS TIME) = '00:00:00.000'
+            ) AS t1
+        )
+        SELECT
+        METER_DT AS METER_TS,
+        FlowChange AS METER
+        FROM
+        CFlowChange
+        WHERE
+        DATEPART(HOUR, METER_DT) % 2 = 0
+        ORDER BY
+        METER_DT
+        ;
+    </select>
+
+</mapper>

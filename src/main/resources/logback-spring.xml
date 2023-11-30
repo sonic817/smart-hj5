@@ -1,0 +1,34 @@
+<configuration>
+    <!-- 로그 메시지 포맷 정의 -->
+    <!-- PATTERN: 이 부분은 로그 메시지의 포맷을 설정하는데 사용되는 변수 이름입니다. 실제 로그 메시지 출력 시에는 이 변수의 값을 사용하여 메시지를 포맷합니다.-->
+    <!-- %d: 로그 이벤트 발생 날짜와 시간을 나타냅니다.-->
+    <!-- %5p: 로그 레벨을 나타냅니다. %5p는 로그 레벨을 5자리로 표시하며, 필요한 경우 더 긴 로그 레벨을 나타내기 위해 늘릴 수 있습니다.-->
+    <!-- [%c]: 로거의 이름(클래스 이름)을 나타냅니다. 로그 이벤트를 생성한 클래스의 이름을 표시합니다.-->
+    <!-- %m: 로그 메시지를 나타냅니다. 실제 메시지 부분입니다.-->
+    <!-- %n: 줄바꿈 문자를 나타냅니다. 로그 메시지 각각의 줄을 구분합니다.-->
+    <property name="PATTERN" value="%d %5p [%c] %m%n" />
+
+    <!-- 콘솔 출력용 앱더 추가 -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 루트 로거 (모든 로그 메시지 출력 비활성화) -->
+    <root level="off">
+        <appender-ref ref="console" />
+    </root>
+
+    <!-- 특정 패키지 (kr.smart.hj5) 로그 설정 -->
+    <logger name="kr.smart.hj5" level="debug" appender-ref="console" />
+
+    <!-- java.sql 패키지 로그 설정 (오류 메시지만 출력) -->
+    <logger name="java.sql" level="error"></logger>
+
+    <!-- jdbc.sqltiming 패키지 로그 설정 (정보 메시지 출력) -->
+    <logger name="jdbc.sqltiming" level="INFO"></logger>
+
+    <!-- jdbc.resultsettable 패키지 로그 설정 (정보 메시지 출력) -->
+    <logger name="jdbc.resultsettable" level="INFO"></logger>
+</configuration>

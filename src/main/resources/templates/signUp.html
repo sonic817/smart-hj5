@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" th:href="@{/css/default.css}"/>
+    <link rel="stylesheet" th:href="@{/css/signup.css}"/>
+    <script src="../static/js/signUp.js"></script>
+    <title>회원가입</title>
+
+    <!-- jQuery 라이브러리 로드 -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<section class="signup">
+    <h2>회원가입</h2>
+    <ul>
+        <li><input type="text" id="userId" placeholder="아이디 입력" title="아이디"/></li>
+        <li>
+            <input type="text" id="tempPw" placeholder="등록코드 입력" title="비밀번호"/>
+        </li>
+        <li>
+            <input type="password" id="userPw" placeholder="비밀번호 입력" title="비밀번호"/>
+        </li>
+        <li>
+            <input type="password" id="confirmPw" oninput="checkPw()" placeholder="비밀번호 확인" title="비밀번호 확인"/>
+        </li>
+        <li>
+            <input type="text" id="hp" placeholder="핸드폰번호 재입력" title="비밀번호 입력"/>
+        </li>
+        <li>
+            <input type="number" id="dong" placeholder="동 입력" title="동"/>
+        </li>
+        <li>
+            <input type="number" id="ho" placeholder="호수 입력" title="호수"/>
+        </li>
+        <li>
+            <button id="submit-button" onclick="showConfirmation()">계정 신청</button>
+        </li>
+    </ul>
+
+</section>
+</body>
+</html>

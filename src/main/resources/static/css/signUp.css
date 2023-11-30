@@ -1,0 +1,43 @@
+.signup {
+  width: 90%; /* 화면 너비의 90%만 사용 */
+  max-width: 410px; /* 최대 너비 설정 */
+  margin: 0 auto; /* 가운데 정렬을 위해 자동 마진 사용 */
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.signup h2 {
+  padding: 0 0 20px;
+  border-bottom: 2px solid #111;
+  text-align: center;
+  line-height: 1;
+  font-size: 32px;
+  color: #111;
+}
+
+.signup > ul {
+  padding: 40px 0 33px;
+}
+
+.signup > ul li {
+  padding: 0 0 12px;
+  text-align: left;
+}
+
+ .signup > ul li input {
+  width: 100%;
+  height: 46;
+  box-sizing: border-box;
+  text-indent: 16px;
+}
+
+.signup button {
+  width: 100%;
+  height: 56px;
+  font-size: 18px;
+  color: #fff;
+  border-radius: 10px; /* 버튼의 꼭지점을 라운딩하고 원하는 정도 설정 */
+}

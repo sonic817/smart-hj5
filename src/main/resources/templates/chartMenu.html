@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" th:href="@{/css/default.css}"/>
+    <link rel="stylesheet" th:href="@{/css/chartMenu.css}"/>
+    <title>차트 메뉴</title>
+</head>
+<body>
+<section class="chartMenu">
+    <h2><span th:text="${sn}"></span> 관련자료입니다</h2>
+    <ul>
+        <li>
+            <button onclick="redirectToChartDay()">가스</button>
+        </li>
+        <li>
+            <button onclick="redirectToChartDay()">수도</button>
+        </li>
+        <li>
+            <button onclick="redirectToChartDay()">열량</button>
+        </li>
+        <li>
+            <button onclick="redirectToChartDay()">??</button>
+        </li>
+        <li>
+            <button onclick="redirectToChartDay()">??</button>
+        </li>
+    </ul>
+</section>
+
+<script th:inline="javascript">
+    function redirectToChartDay() {
+        const url = "/chart/day?sn=" + [[${sn}]];
+        window.location.href = url;
+    }
+</script>
+</body>
+</html>
